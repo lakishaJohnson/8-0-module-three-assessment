@@ -44,8 +44,8 @@ class Movies extends React.Component {
       <div className="movies">
         <h1>Select a Movie</h1>
         <select onChange={this.handleDropdownChange}>
-            <option>
-                Empty
+            <option value="">
+                Select a Movie
             </option>
            {dropDownOptions} 
         </select>

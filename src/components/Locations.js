@@ -7,30 +7,24 @@ class Location extends React.Component{
 
     this.state = {
       // locationData: {},
-      showLocation: true,
+      showLocation: false,
       locations: [],
-      text: "Show Locations"
     }
+    this.changeText = this.changeText.bind(this)
   }
 
   changeText = () => {
     this.setState({
-      text: "Hide Locations"
-    })
-  }
-
-  changeText2 = () => {
-    this.setState({
-      text: "Hide Locations"
-    })
-  }
-
-  toggleLocations = (event) => {
-    event.preventDefault()
-    this.setState({
       showLocation: !this.state.showLocation
     })
   }
+
+  // toggleLocations = (event) => {
+  //   event.preventDefault()
+  //   this.setState({
+  //     locations: 
+  //   })
+  // }
   
   componentDidMount() {
     fetch("https://ghibliapi.herokuapp.com/locations")
@@ -46,13 +40,14 @@ class Location extends React.Component{
   render() {
       let locate = this.state.locations.map((spot, i) => {
         return (
-          <div className="location-view" key={i}>
-            <ul>
-              <li>
+          // <div className="location-view" key={i}>
+          //   <ul>
+              <li key={i}>
             <h3>Name: {spot.name}</h3>
             <h3>Climate: {spot.climate}</h3>
-            <h3>Terrain: {spot.terrain}</h3></li></ul>
-          </div>
+            <h3>Terrain: {spot.terrain}</h3></li>
+          //   </ul>
+          // </div>
         )
       })
 
@@ -62,9 +57,14 @@ class Location extends React.Component{
           <h1>List of Locations</h1>
         </main>
         
-        <button onClick={() => {this.changeText()}}>{this.state.text}</button>
-        <div>
-          {this.state.showLocation ? locate : ""}
+        <button onClick={this.changeText}>{this.state.showLocation ? "Hide Locations" : "Show Locations"}
+        
+        </button>
+        <div className="location-view" >
+            <ul>
+          {this.state.showLocation && locate}
+          </ul>
+        
         </div>
         
       </div>
